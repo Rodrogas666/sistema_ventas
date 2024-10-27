@@ -1,0 +1,32 @@
+﻿@model IEnumerable<sistema_ventas.Models.HistorialCompraViewModel>
+@{
+    ViewBag.Title = "Historial de Compras";
+}
+
+<h2>Historial de Compras</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Concierto</th>
+            <th>Fecha del Concierto</th>
+            <th>Lugar</th>
+            <th>Sección</th>
+            <th>Cantidad Comprada</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var compra in Model)
+        {
+            <tr>
+                <td>@compra.NombreConcierto</td>
+                <td>@compra.FechaConcierto.ToString("dd/MM/yyyy")</td>
+                <td>@compra.LugarConcierto</td>
+                <td>@compra.SeccionConcierto</td>
+                <td>@compra.CantidadComprada</td>
+                <td>$@compra.TotalCompra</td>
+            </tr>
+        }
+    </tbody>
+</table>

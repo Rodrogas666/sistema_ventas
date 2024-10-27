@@ -1,0 +1,35 @@
+﻿@model IEnumerable<sistema_ventas.Models.Concierto>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Lugar</th>
+            <th>Sección</th>
+            <th>Precio</th>
+            <th>Cantidad Disponibles</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var concert in Model)
+        {
+            <tr>
+                <td data-label="Nombre">@concert.Nombre</td>
+                <td data-label="Fecha">@concert.Fecha.ToString("dd MMM yyyy")</td>
+                <td data-label="Lugar">@concert.Lugar</td>
+                <td data-label="Sección">@concert.Seccion</td>
+                <td data-label="Precio">$@concert.Precio.ToString("F2")</td>
+                <td data-label="Cantidad Disponibles">@concert.CantidadDisponibles</td>
+                <td data-label="Acciones">
+                    <a href="/Home/Comprar/@concert.Id">
+                        <button class="button">Comprar</button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

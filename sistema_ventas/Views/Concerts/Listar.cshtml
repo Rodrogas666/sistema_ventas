@@ -1,0 +1,66 @@
+﻿@model IEnumerable<sistema_ventas.Models.Concierto>
+@{
+    ViewData["Title"] = "Gestión de Conciertos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form id="concertForm" method="post" action=@Url.Action("Create", "Concerts") style="margin-bottom: 30px;">
+    <h3>Crear/Editar Concierto</h3>
+
+    <label for="concertName">Nombre del Concierto:</label>
+    <input type="text" id="concertName" name="Nombre" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="concertDate">Fecha:</label>
+    <input type="date" id="concertDate" name="Fecha" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="concertVenue">Lugar:</label>
+    <input type="text" id="concertVenue" name="Lugar" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="concertSections">Secciones:</label>
+    <select id="concertSections" name="Seccion" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="VIP">VIP</option>
+        <option value="Platea">Platea</option>
+        <option value="General">General</option>
+    </select>
+
+    <label for="ticketPrice">Precio por Entrada:</label>
+    <input type="number" id="ticketPrice" name="Precio" required step="0.01" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="ticketQuantity">Cantidad de Entradas Disponibles:</label>
+    <input type="number" id="ticketQuantity" name="CantidadDisponibles" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <button type="submit" class="button">Guardar Concierto</button>
+</form>
+
+<h3>Lista de Conciertos</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Lugar</th>
+            <th>Sección</th>
+            <th>Precio</th>
+            <th>Cantidad Disponibles</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var concert in Model)
+        {
+            <tr>
+                <td>@concert.Nombre</td>
+                <td>@concert.Fecha.ToShortDateString()</td>
+                <td>@concert.Lugar</td>
+                <td>@concert.Seccion</td>
+                <td>@String.Format("{0:C}", concert.Precio)</td>
+                <td>@concert.CantidadDisponibles</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = concert.Id }, new { @class = "button" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = concert.Id }, new { @class = "button", @style = "background-color: #e74c3c" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,24 @@
+﻿@model sistema_ventas.Models.Concierto
+@{
+    ViewData["Title"] = "Eliminar Concierto";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>¿Estás seguro de que deseas eliminar el siguiente concierto?</p>
+
+<div style="margin-bottom: 20px;">
+    <p><strong>Nombre:</strong> @Model.Nombre</p>
+    <p><strong>Fecha:</strong> @Model.Fecha.ToShortDateString()</p>
+    <p><strong>Lugar:</strong> @Model.Lugar</p>
+    <p><strong>Sección:</strong> @Model.Seccion</p>
+    <p><strong>Precio:</strong> @String.Format("{0:C}", Model.Precio)</p>
+    <p><strong>Cantidad Disponibles:</strong> @Model.CantidadDisponibles</p>
+</div>
+
+<form action=@Url.Action("Delete", "Concerts") method="post" asp-action="DeleteConfirmed" asp-controller="Concerts">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="button" style="background-color: #e74c3c; color: white;">Confirmar Eliminación</button>
+    <a asp-action="Index" asp-controller="Concerts" class="button" style="background-color: #ccc; color: black; margin-left: 10px;">Cancelar</a>
+</form>

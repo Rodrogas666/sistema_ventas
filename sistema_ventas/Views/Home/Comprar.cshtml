@@ -1,0 +1,28 @@
+﻿@model sistema_ventas.Models.Concierto
+@{
+    ViewData["Title"] = "Comprar Entradas";
+}
+
+<h2>Comprar Entradas para @Model.Nombre</h2>
+
+<div>
+    <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd MMM yyyy")</p>
+    <p><strong>Lugar:</strong> @Model.Lugar</p>
+    <p><strong>Sección:</strong> @Model.Seccion</p>
+    <p><strong>Precio:</strong> $@Model.Precio.ToString("F2")</p>
+    <p><strong>Entradas Disponibles:</strong> @Model.CantidadDisponibles</p>
+</div>
+
+<form action="@Url.Action("ConfirmarCompra", "Home")" method="post" style="margin-top: 20px;">
+    <input type="hidden" name="idConcierto" value="@Model.Id" />
+
+    <label for="cantidad" style="display: block; margin-top: 10px;"><strong>Cantidad de Entradas:</strong></label>
+    <input type="number" name="cantidad" id="cantidad" min="1" max="@Model.CantidadDisponibles" required style="padding: 8px; width: 100px; margin-top: 5px; border-radius: 5px; border: 1px solid #ddd;" />
+
+    <button type="submit" class="button" style="margin-top: 15px;">Confirmar Compra</button>
+</form>
+
+@if (TempData["MensajeCompra"] != null)
+{
+    <p style="color: green; margin-top: 15px;">@TempData["MensajeCompra"]</p>
+}

@@ -1,0 +1,35 @@
+﻿@model sistema_ventas.Models.Concierto
+@{
+    ViewData["Title"] = "Editar Concierto";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form action=@Url.Action("Edit", "Concerts") id="editConcertForm" method="post" asp-action="Edit" asp-controller="Concerts" style="margin-bottom: 30px;">
+    <input type="hidden" asp-for="Id" />
+
+    <label for="concertName">Nombre del Concierto:</label>
+    <input type="text" id="concertNa me" name="Nombre" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="concertDate">Fecha:</label>
+    <input type="date" id="concertDate" name="Fecha" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="concertVenue">Lugar:</label>
+    <input type="text" id="concertVenue" name="Lugar" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="concertSections">Secciones:</label>
+    <select id="concertSections" name="Seccion" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="VIP" selected="@((Model.Seccion == "VIP") ? "selected" : "")">VIP</option>
+        <option value="Platea" selected="@((Model.Seccion == "Platea") ? "selected" : "")">Platea</option>
+        <option value="General" selected="@((Model.Seccion == "General") ? "selected" : "")">General</option>
+    </select>
+
+    <label for="ticketPrice">Precio por Entrada:</label>
+    <input type="number" id="ticketPrice" name="Precio" required step="0.01" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="ticketQuantity">Cantidad de Entradas Disponibles:</label>
+    <input type="number" id="ticketQuantity" name="CantidadDisponibles" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <button type="submit" class="button">Guardar Cambios</button>
+    <a asp-action="Index" asp-controller="Concerts" class="button" style="background-color: #ccc; margin-left: 10px;">Cancelar</a>
+</form>
