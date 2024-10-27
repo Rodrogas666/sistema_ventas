@@ -1,77 +1,129 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="es">
 <head>
-    <title>Inicio de sesión</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link href="~/Content/css/Login.css" rel="stylesheet" />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%; /* Cambiado de 300px a 90% para adaptarse mejor */
+            max-width: 400px; /* Se agrega un ancho máximo */
+            text-align: center;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group {
+            margin: 8px 0; /* Separa los inputs */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Asegura que los inputs ocupen todo el contenedor */
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box; /* Incluye padding y border en el ancho total */
+        }
+
+            input[type="text"]:focus,
+            input[type="password"]:focus {
+                border-color: #007aff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+            }
+
+        .login_btn {
+            background-color: #007aff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+            .login_btn:hover {
+                background-color: #0051a8;
+            }
+
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .links {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+            .links a {
+                color: #007aff;
+                text-decoration: none;
+            }
+
+                .links a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 </head>
 <body>
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
-            <div class="user_card">
-                <div class="d-flex justify-content-center">
-                    <div class="brand_logo_container">
-                        <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png" class="brand_logo" alt="Logo">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center form_container">
-                    <form action="@Url.Action("Registrar", "Acceso")" method="post">
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            </div>
-                            <input type="text" name="Correo" class="form-control input_user" value="" placeholder="Correo">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            </div>
-                            <input type="password" name="Clave" class="form-control input_user" value="" placeholder="Contraseña">
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" name="ConfirmarClave" class="form-control input_pass" value="" placeholder="Confirmar contraseña">
-                        </div>
-
-                        @if (ViewData["Mensaje"] != null)
-                        {
-                            <div class="alert alert-danger" role="alert">
-                                @ViewData["Mensaje"]
-                            </div>
-
-                        }
-
-
-
-
-                        <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="submit" name="button" class="btn login_btn">Registrarse</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="mt-4">
-                    <div class="d-flex justify-content-center links">
-                        ¿Ya tienes una cuenta? <a href="@Url.Action("Login", "Acceso")" class="ml-2">Inicia sesión</a>
-                    </div>
-
-                </div>
+    <div class="container">
+        <h4>Registrarse</h4>
+        <form action="@Url.Action("Registrar", "Acceso")" method="post">
+            <div class="input-group">
+                <input type="text" name="Correo" id="correo" placeholder="Correo" required>
             </div>
+            <div class="input-group">
+                <input type="password" name="Clave" id="clave" placeholder="Contraseña" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="ConfirmarClave" id="confirmarClave" placeholder="Confirmar contraseña" required>
+            </div>
+
+            @if (ViewData["Mensaje"] != null)
+            {
+                <div class="alert" role="alert">
+                    @ViewData["Mensaje"]
+                </div>
+            }
+
+            <div class="input-group">
+                <button type="submit" class="login_btn">Registrarse</button>
+            </div>
+        </form>
+
+        <div class="links">
+            ¿Ya tienes una cuenta? <a href="@Url.Action("Login", "Acceso")">Inicia sesión</a>
         </div>
     </div>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
