@@ -117,7 +117,7 @@
         <nav>
             <ul class="navbar-nav flex-grow-1">
                 <li>@Html.ActionLink("Inicio", "Listar", "Concerts", new { area = "" }, new { @class = "nav-link" })</li>
-                @if (Session["rol"] != null && Session["rol"].ToString() == "usuario")
+                @if (Session["rol"] != null && Session["rol"].ToString() == "Usuario")
                 {
                     <li>@Html.ActionLink("Historial de Compras", "Historial", "Home", null, new { @class = "nav-link" })</li>
                 }

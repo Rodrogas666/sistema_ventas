@@ -29,12 +29,12 @@ namespace sistema_ventas.Controllers
                         concerts.Add(new Concierto
                         {
                             Id = Convert.ToInt32(reader["Id"]),
-                            Nombre = reader["Nombre"].ToString(),  // Cambiado de Name a Nombre
-                            Fecha = Convert.ToDateTime(reader["Fecha"]), // Cambiado de Date a Fecha
-                            Lugar = reader["Lugar"].ToString(), // Cambiado de Venue a Lugar
-                            Seccion = reader["Seccion"].ToString(), // Cambiado de Section a Seccion
-                            Precio = Convert.ToDecimal(reader["Precio"]), // Cambiado de TicketPrice a Precio
-                            CantidadDisponibles = Convert.ToInt32(reader["CantidadDisponibles"]) // Cambiado de QuantityAvailable a CantidadDisponibles
+                            Nombre = reader["Nombre"].ToString(),  
+                            Fecha = Convert.ToDateTime(reader["Fecha"]), 
+                            Lugar = reader["Lugar"].ToString(), 
+                            Seccion = reader["Seccion"].ToString(), 
+                            Precio = Convert.ToDecimal(reader["Precio"]), 
+                            CantidadDisponibles = Convert.ToInt32(reader["CantidadDisponibles"]) 
                         });
                     }
                 }
@@ -56,12 +56,12 @@ namespace sistema_ventas.Controllers
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("sp_CrearConcierto", cn);
-                cmd.Parameters.AddWithValue("Nombre", concert.Nombre); // Cambiado de Name a Nombre
-                cmd.Parameters.AddWithValue("Fecha", concert.Fecha); // Cambiado de Date a Fecha
-                cmd.Parameters.AddWithValue("Lugar", concert.Lugar); // Cambiado de Venue a Lugar
-                cmd.Parameters.AddWithValue("Seccion", concert.Seccion); // Cambiado de Section a Seccion
-                cmd.Parameters.AddWithValue("Precio", concert.Precio); // Cambiado de TicketPrice a Precio
-                cmd.Parameters.AddWithValue("CantidadDisponibles", concert.CantidadDisponibles); // Cambiado de QuantityAvailable a CantidadDisponibles
+                cmd.Parameters.AddWithValue("Nombre", concert.Nombre);
+                cmd.Parameters.AddWithValue("Fecha", concert.Fecha);
+                cmd.Parameters.AddWithValue("Lugar", concert.Lugar);
+                cmd.Parameters.AddWithValue("Seccion", concert.Seccion);
+                cmd.Parameters.AddWithValue("Precio", concert.Precio);
+                cmd.Parameters.AddWithValue("CantidadDisponibles", concert.CantidadDisponibles);
                 cmd.Parameters.Add("Registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -77,13 +77,14 @@ namespace sistema_ventas.Controllers
 
             if (registrado)
             {
-                return RedirectToAction("Listar", "Concerts");
+                return RedirectToAction("Listar", "Concerts"); 
             }
             else
             {
                 return View(concert);
             }
         }
+
 
         public ActionResult Edit(int? id)
         {
@@ -109,12 +110,12 @@ namespace sistema_ventas.Controllers
                         concert = new Concierto
                         {
                             Id = Convert.ToInt32(reader["Id"]),
-                            Nombre = reader["Nombre"].ToString(), // Cambiado de Name a Nombre
-                            Fecha = Convert.ToDateTime(reader["Fecha"]), // Cambiado de Date a Fecha
-                            Lugar = reader["Lugar"].ToString(), // Cambiado de Venue a Lugar
-                            Seccion = reader["Seccion"].ToString(), // Cambiado de Section a Seccion
-                            Precio = Convert.ToDecimal(reader["Precio"]), // Cambiado de TicketPrice a Precio
-                            CantidadDisponibles = Convert.ToInt32(reader["CantidadDisponibles"]) // Cambiado de QuantityAvailable a CantidadDisponibles
+                            Nombre = reader["Nombre"].ToString(),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]), 
+                            Lugar = reader["Lugar"].ToString(), 
+                            Seccion = reader["Seccion"].ToString(), 
+                            Precio = Convert.ToDecimal(reader["Precio"]), 
+                            CantidadDisponibles = Convert.ToInt32(reader["CantidadDisponibles"]) 
                         };
                     }
                 }
@@ -137,12 +138,12 @@ namespace sistema_ventas.Controllers
             {
                 SqlCommand cmd = new SqlCommand("sp_ActualizarConcierto", cn);
                 cmd.Parameters.AddWithValue("Id", concert.Id);
-                cmd.Parameters.AddWithValue("Nombre", concert.Nombre); // Cambiado de Name a Nombre
-                cmd.Parameters.AddWithValue("Fecha", concert.Fecha); // Cambiado de Date a Fecha
-                cmd.Parameters.AddWithValue("Lugar", concert.Lugar); // Cambiado de Venue a Lugar
-                cmd.Parameters.AddWithValue("Seccion", concert.Seccion); // Cambiado de Section a Seccion
-                cmd.Parameters.AddWithValue("Precio", concert.Precio); // Cambiado de TicketPrice a Precio
-                cmd.Parameters.AddWithValue("CantidadDisponibles", concert.CantidadDisponibles); // Cambiado de QuantityAvailable a CantidadDisponibles
+                cmd.Parameters.AddWithValue("Nombre", concert.Nombre); 
+                cmd.Parameters.AddWithValue("Fecha", concert.Fecha); 
+                cmd.Parameters.AddWithValue("Lugar", concert.Lugar); 
+                cmd.Parameters.AddWithValue("Seccion", concert.Seccion); 
+                cmd.Parameters.AddWithValue("Precio", concert.Precio); 
+                cmd.Parameters.AddWithValue("CantidadDisponibles", concert.CantidadDisponibles); 
                 cmd.Parameters.Add("Actualizado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -167,7 +168,6 @@ namespace sistema_ventas.Controllers
         }
 
         public ActionResult Delete(int? id)
-
         {
             if (id == null)
             {
@@ -179,7 +179,7 @@ namespace sistema_ventas.Controllers
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("sp_ObtenerConcierto", cn);
-                cmd.Parameters.AddWithValue("Id", id);
+                cmd.Parameters.AddWithValue("@Id", id); 
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cn.Open();
@@ -190,12 +190,12 @@ namespace sistema_ventas.Controllers
                         concert = new Concierto
                         {
                             Id = Convert.ToInt32(reader["Id"]),
-                            Nombre = reader["Nombre"].ToString(), // Cambiado de Name a Nombre
-                            Fecha = Convert.ToDateTime(reader["Fecha"]), // Cambiado de Date a Fecha
-                            Lugar = reader["Lugar"].ToString(), // Cambiado de Venue a Lugar
-                            Seccion = reader["Seccion"].ToString(), // Cambiado de Section a Seccion
-                            Precio = Convert.ToDecimal(reader["Precio"]), // Cambiado de TicketPrice a Precio
-                            CantidadDisponibles = Convert.ToInt32(reader["CantidadDisponibles"]) // Cambiado de QuantityAvailable a CantidadDisponibles
+                            Nombre = reader["Nombre"].ToString(),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Lugar = reader["Lugar"].ToString(),
+                            Seccion = reader["Seccion"].ToString(),
+                            Precio = Convert.ToDecimal(reader["Precio"]),
+                            CantidadDisponibles = Convert.ToInt32(reader["CantidadDisponibles"])
                         };
                     }
                 }
@@ -217,9 +217,9 @@ namespace sistema_ventas.Controllers
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("sp_EliminarConcierto", cn);
-                cmd.Parameters.AddWithValue("Id", id);
-                cmd.Parameters.Add("Eliminado", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.Parameters.AddWithValue("@Id", id); 
+                cmd.Parameters.Add("Eliminado", SqlDbType.Bit).Direction = ParameterDirection.Output; 
+                cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output; 
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cn.Open();
@@ -233,5 +233,6 @@ namespace sistema_ventas.Controllers
 
             return RedirectToAction("Listar", "Concerts");
         }
+
     }
 }

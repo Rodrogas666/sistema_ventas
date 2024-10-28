@@ -90,7 +90,13 @@ namespace sistema_ventas.Controllers
         [ValidarSesion]
         public ActionResult ConfirmarCompra(int? idConcierto, int? cantidad)
         {
-            int usuarioId = (int)Session["usuarioId"];  // Asegúrate de que usuarioId está en la sesión
+            if (idConcierto == null || cantidad == null)
+            {
+                TempData["MensajeCompra"] = "Datos de compra inválidos.";
+                return RedirectToAction("Comprar", "Home");
+            }
+
+            int usuarioId = (int)Session["usuarioId"]; 
 
             using (SqlConnection cn = new SqlConnection(cadena))
             {
@@ -98,20 +104,21 @@ namespace sistema_ventas.Controllers
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("UsuarioId", usuarioId);
                 cmd.Parameters.AddWithValue("ConciertoId", idConcierto);
-                cmd.Parameters.AddWithValue("CantidadComprada", cantidad);
+                cmd.Parameters.AddWithValue("CantidadEntradas", cantidad); 
 
                 cn.Open();
                 cmd.ExecuteNonQuery();
             }
 
             TempData["MensajeCompra"] = "Compra realizada con éxito.";
-            return RedirectToAction("Comprar", "Home", new { id = idConcierto});
+            return RedirectToAction("Comprar", "Home", new { id = idConcierto });
         }
 
-        [ValidarSesion]
+
+
         public ActionResult Historial()
         {
-            int usuarioId = (int)Session["usuarioId"];  // Asegúrate de que el ID del usuario esté almacenado en la sesión
+            int usuarioId = (int)Session["usuarioId"];  
             var historialCompras = new List<HistorialCompraViewModel>();
 
             using (SqlConnection cn = new SqlConnection(cadena))
