@@ -10,7 +10,7 @@ namespace sistema_ventas.Controllers
 {
     public class ConcertsController : Controller
     {
-        static string cadena = "Data Source=DESKTOP-JCJT4VD;Initial Catalog=servicio_ventas;Integrated Security=true";
+        static string cadena = @"Data Source=DESKTOP-JCJT4VD\SQLEXPRESS ;Initial Catalog=servicio_ventas;Integrated Security=true";
 
         [ValidarAdminAtribute]
         public ActionResult Listar()

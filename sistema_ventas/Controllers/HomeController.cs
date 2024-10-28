@@ -11,7 +11,7 @@ namespace sistema_ventas.Controllers
 {
     public class HomeController : Controller
     {
-        static string cadena = "Data Source=DESKTOP-JCJT4VD;Initial Catalog=servicio_ventas;Integrated Security=true";
+        static string cadena = @"Data Source=DESKTOP-JCJT4VD\SQLEXPRESS;Initial Catalog=servicio_ventas;Integrated Security=true";
 
         [ValidarSesion]
         public ActionResult Index()

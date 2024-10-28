@@ -16,7 +16,7 @@ namespace sistema_ventas.Controllers
     public class AccesoController : Controller
     {
 
-        static string cadena = "Data Source=DESKTOP-JCJT4VD;Initial Catalog=servicio_ventas;Integrated Security=true";
+        static string cadena = @"Data Source=DESKTOP-JCJT4VD\SQLEXPRESS ;Initial Catalog=servicio_ventas;Integrated Security=true";
         // GET: Acceso
         public ActionResult Login()
         {
@@ -49,9 +49,10 @@ namespace sistema_ventas.Controllers
 
             using (SqlConnection cn = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn); 
+                SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
                 cmd.Parameters.AddWithValue("Correo", oUsuario.Correo);
                 cmd.Parameters.AddWithValue("Clave", oUsuario.Clave);
+                cmd.Parameters.AddWithValue("Rol", oUsuario.Rol ?? "Usuario"); 
                 cmd.Parameters.Add("Registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
